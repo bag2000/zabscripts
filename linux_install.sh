@@ -24,3 +24,4 @@ ExecStart=/usr/bin/RestartZabbix.sh
 [Install]
 WantedBy=multi-user.target
 EOF
+systemctl daemon-reload
