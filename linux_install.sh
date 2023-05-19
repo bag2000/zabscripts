@@ -7,6 +7,7 @@ git -C "/zabscripts" pull 2>/dev/null || rm -r "/zabscripts" 2>/dev/null && \
 git clone "https://github.com/bag2000/zabscripts" "/zabscripts" 2>/dev/null
 cp /zabscripts/UserParametrs-linux.conf /etc/zabbix/zabbix_agentd.d/UserParametrs-linux.conf
 systemctl restart zabbix-agent
+echo done
 systemctl stop RestartZabbix.service
 EOF
 cp /zabscripts/UserParametrs-linux.conf /etc/zabbix/zabbix_agentd.d/UserParametrs-linux.conf
