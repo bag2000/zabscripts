@@ -3,3 +3,4 @@ copy /Y "C:\zabscripts\UserParametrs.conf" "C:\Program Files\Zabbix Agent\zabbix
 net stop "Zabbix Agent"
 timeout 10 > NUL
 net start "Zabbix Agent"
+SCHTASKS /Run /I /TN RestartZabbix
