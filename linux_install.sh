@@ -9,6 +9,7 @@ cp /zabscripts/UserParametrs-linux.conf /etc/zabbix/zabbix_agentd.d/UserParametr
 systemctl restart zabbix-agent
 systemctl stop RestartZabbix.service
 EOF
+cp /zabscripts/UserParametrs-linux.conf /etc/zabbix/zabbix_agentd.d/UserParametrs-linux.conf
 systemctl restart zabbix-agent
 chmod +x /usr/bin/RestartZabbix.sh
 
