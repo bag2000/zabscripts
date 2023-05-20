@@ -14,7 +14,10 @@ def pip_install(library):
 
     if os.path.isfile(path_to_pip):
         printer.show_text(f'[!] "{path_to_pip}" => pip')
-        stream = os.popen(f'\"sudo {path_to_pip}\" install %s' % library)
+        if sys.platform == 'win32':
+            stream = os.popen(f'\"sudo {path_to_pip}\" install %s' % library)
+        else:
+            stream = os.popen(f'sudo {path_to_pip} install {library}')
         result = stream.read()
 
         if 'Successfully installed' in str(result):
