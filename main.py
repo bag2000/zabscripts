@@ -1,6 +1,6 @@
 from services import Services
 import sys
-# from printer import show_text as show
+from printer import show_text as show
 import argparse
 
 if __name__ == "__main__":
@@ -21,5 +21,4 @@ if __name__ == "__main__":
         elif args.service == 'restart':
             service = Services(args.target).restart_service()
 
-    if sys.platform != 'win32':
-        print('Linux')
+    show(sys.platform)
