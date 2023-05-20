@@ -24,7 +24,8 @@ class Services:
         if sys.platform == 'win32':
             show(f'Статус службы {self.name_service} - {self.service.status()}')
         else:
-            os.popen(f"sudo systemctl status {self.name_service}")
+            a = os.popen(f"sudo systemctl status {self.name_service}")
+            show(a.read())
 
     def stop_service(self):
 
