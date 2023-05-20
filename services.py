@@ -43,26 +43,32 @@ class Services:
             else:
                 show(f'Служба {self.name_service} не запущена.')
         else:
-            a = os.popen(f"sudo systemctl stop {self.name_service}")
-            show(a.read())
+            os.popen(f"sudo systemctl stop {self.name_service}")
+            show(f'Службе {self.name_service} передан сигнал остановки')
 
     def start_service(self):
-
-        if self.service.status() != 'running':
-            seconds = 30
-            os.popen(f"net start {self.name_service} 1>nul 2>nul")
-            while self.service.status() != 'running':
-                time.sleep(1)
-                seconds -= 1
-                show(f'Служба {self.name_service} запускается.')
-                if seconds <= 0:
-                    show(f'Не удалось запустить службу {self.name_service}')
-                    sys.exit()
-            show(f'Служба {self.name_service} запущена.')
+        if sys.platform == 'win32':
+            if self.service.status() != 'running':
+                seconds = 30
+                os.popen(f"net start {self.name_service} 1>nul 2>nul")
+                while self.service.status() != 'running':
+                    time.sleep(1)
+                    seconds -= 1
+                    show(f'Служба {self.name_service} запускается.')
+                    if seconds <= 0:
+                        show(f'Не удалось запустить службу {self.name_service}')
+                        sys.exit()
+                show(f'Служба {self.name_service} запущена.')
+            else:
+                show(f'Служба {self.name_service} запущена.')
         else:
-            show(f'Служба {self.name_service} запущена.')
+            os.popen(f"sudo systemctl start {self.name_service}")
+            show(f'Службе {self.name_service} передан сигнал запуска')
 
     def restart_service(self):
-
-        self.stop_service()
-        self.start_service()
+        if sys.platform == 'win32':
+            self.stop_service()
+            self.start_service()
+        else:
+            os.popen(f"sudo systemctl restart {self.name_service}")
+            show(f'Службе {self.name_service} передан сигнал перезапуска')

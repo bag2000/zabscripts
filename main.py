@@ -20,6 +20,3 @@ if __name__ == "__main__":
             service = Services(args.target).start_service()
         elif args.service == 'restart':
             service = Services(args.target).restart_service()
-
-    show(sys.platform)
-    print('OK')
