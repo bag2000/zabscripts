@@ -28,20 +28,23 @@ class Services:
             show(a.read())
 
     def stop_service(self):
-
-        if self.service.status() != 'stopped':
-            seconds = 30
-            os.popen(f"net stop {self.name_service} 1>nul 2>nul")
-            while self.service.status() != 'stopped':
-                time.sleep(1)
-                seconds -= 1
-                show(f'Служба {self.name_service} останавливается.')
-                if seconds <= 0:
-                    show(f'Не удалось остановить службу {self.name_service}')
-                    sys.exit()
-            show(f'Служба {self.name_service} оастановлена.')
+        if sys.platform == 'win32':
+            if self.service.status() != 'stopped':
+                seconds = 30
+                os.popen(f"net stop {self.name_service} 1>nul 2>nul")
+                while self.service.status() != 'stopped':
+                    time.sleep(1)
+                    seconds -= 1
+                    show(f'Служба {self.name_service} останавливается.')
+                    if seconds <= 0:
+                        show(f'Не удалось остановить службу {self.name_service}')
+                        sys.exit()
+                show(f'Служба {self.name_service} оастановлена.')
+            else:
+                show(f'Служба {self.name_service} не запущена.')
         else:
-            show(f'Служба {self.name_service} не запущена.')
+            a = os.popen(f"sudo systemctl stop {self.name_service}")
+            show(a.read())
 
     def start_service(self):
 
