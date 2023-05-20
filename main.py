@@ -1,6 +1,4 @@
 from services import Services
-import sys
-from printer import show_text as show
 import argparse
 
 if __name__ == "__main__":
@@ -11,6 +9,7 @@ if __name__ == "__main__":
                         help='Название (цель) чего-либо. Например, службы, ip адреса и т.д.')
     args = parser.parse_args()
 
+    #  Управление службами
     if args.service != '' and args.target != '':
         if args.service == 'status':
             service = Services(args.target).status_service()
