@@ -17,7 +17,8 @@ class Services:
 
     def __init__(self, name_service: str):
         self.name_service = name_service
-        self.service = psutil.win_service_get(self.name_service)
+        if sys.platform == 'win32':
+            self.service = psutil.win_service_get(self.name_service)
 
     def status_service(self):
         if sys.platform == 'win32':
