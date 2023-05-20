@@ -7,9 +7,14 @@ def pip_install(library):
     """Locate pip.exe on system and install library.
     Be sure to sanitize input to prevent RCE."""
 
-    if os.path.isfile("C:/Program Files/Python3/Scripts/pip.exe"):
-        printer.show_text('[!] "C:/Program Files/Python3/Scripts/pip.exe" => pip')
-        stream = os.popen('\"C:/Program Files/Python3/Scripts/pip.exe\" install %s' % library)
+    if sys.platform == 'win32':
+        path_to_pip = 'C:/Program Files/Python3/Scripts/pip.exe'
+    else:
+        path_to_pip = '/usr/bin/pip'
+
+    if os.path.isfile(path_to_pip):
+        printer.show_text(f'[!] "{path_to_pip}" => pip')
+        stream = os.popen(f'\"{path_to_pip}\" install %s' % library)
         result = stream.read()
 
         if 'Successfully installed' in str(result):
@@ -21,5 +26,5 @@ def pip_install(library):
                 or 'FAILURE' in str(result).upper():
             printer.show_text('[!] Unable to install %d' % library)
             printer.show_text('[!] Please manually run the pip installer')
-            printer.show_text('[!] try: C:/Program Files/Python3/Scripts/pip.exe %s' % library)
+            printer.show_text(f'[!] try: {path_to_pip} %s' % library)
             sys.exit()

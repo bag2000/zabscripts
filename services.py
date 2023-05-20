@@ -9,8 +9,7 @@ try:
 except Exception as e:
     show('[!] Error importing psutil ... Trying pip installer')
     pipi('psutil')
-    with open('log.log', 'w') as file:
-        file.write(str(e))
+    show(e)
 
 
 class Services:
