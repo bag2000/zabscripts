@@ -20,7 +20,10 @@ class Services:
         self.service = psutil.win_service_get(self.name_service)
 
     def status_service(self):
-        show(f'Статус службы {self.name_service} - {self.service.status()}')
+        if sys.platform == 'win32':
+            show(f'Статус службы {self.name_service} - {self.service.status()}')
+        else:
+            os.popen(f"sudo systemctl status {self.name_service}")
 
     def stop_service(self):
 
