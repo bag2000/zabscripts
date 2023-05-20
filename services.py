@@ -4,12 +4,13 @@ from printer import show_text as show
 from modulinst import pip_install as pipi
 import time
 
-try:
-    import psutil
-except Exception as e:
-    show('[!] Error importing psutil ... Trying pip installer')
-    pipi('psutil')
-    show(e)
+if sys.platform == 'win32':
+    try:
+        import psutil
+    except Exception as e:
+        show('[!] Error importing psutil ... Trying pip installer')
+        pipi('psutil')
+        show(e)
 
 
 class Services:
