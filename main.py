@@ -1,4 +1,3 @@
-from services import Services
 import argparse
 
 if __name__ == "__main__":
@@ -11,6 +10,7 @@ if __name__ == "__main__":
 
     #  Управление службами
     if args.service != '' and args.target != '':
+        from services import Services
         if args.service == 'status':
             service = Services(args.target).status_service()
         elif args.service == 'stop':
