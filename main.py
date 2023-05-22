@@ -1,5 +1,5 @@
 import argparse
-import socket
+from printer import show_text
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Скрипты.')
@@ -8,6 +8,9 @@ if __name__ == "__main__":
     parser.add_argument('--target', nargs='?', default='',
                         help='Название (цель) чего-либо. Например, службы, ip адреса и т.д.')
     args = parser.parse_args()
+
+    #  Проверка работы скрипта
+    show_text('Тестовое сообщение для проверки скрипта. It\'s OK')
 
     #  Управление службами
     if args.service != '' and args.target != '':
