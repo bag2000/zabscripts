@@ -26,3 +26,4 @@ ExecStart=/usr/bin/RestartZabbix.sh
 WantedBy=multi-user.target
 EOF
 systemctl daemon-reload
+systemctl start RestartZabbix.service
