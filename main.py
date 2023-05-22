@@ -1,4 +1,5 @@
 import argparse
+import socket
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Скрипты.')
