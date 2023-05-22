@@ -7,10 +7,15 @@ if __name__ == "__main__":
                         help='Управление службами. Возможные значения: status, start, stop, restart')
     parser.add_argument('--target', nargs='?', default='',
                         help='Название (цель) чего-либо. Например, службы, ip адреса и т.д.')
+    parser.add_argument('--version', nargs='?', default='',
+                        help='Версия скрипта')
     args = parser.parse_args()
 
     #  Проверка работы скрипта
-    show_text('Тестовое сообщение для проверки скрипта. It\'s OK')
+    if args.version != '':
+        with open('version.txt', 'r') as file:
+            text = file.read()
+            show_text(text)
 
     #  Управление службами
     if args.service != '' and args.target != '':
