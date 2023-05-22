@@ -1,7 +1,7 @@
 import argparse
 from printer import show_text
 
-version = 1.0
+version = '1.0.0'
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Скрипты.')
