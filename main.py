@@ -1,21 +1,22 @@
 import argparse
 from printer import show_text
 
+version = 1.0
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Скрипты.')
     parser.add_argument('--service', nargs='?', choices=['status', 'start', 'stop', 'restart'], default='',
-                        help='Управление службами. Возможные значения: status, start, stop, restart')
+                        help='Управление службами. Возможные значения: status, start, stop, restart\n'
+                             'Используется совместно с --target\n'
+                             'Пример: python main.py --service status --target MSSQLSERVER')
     parser.add_argument('--target', nargs='?', default='',
                         help='Название (цель) чего-либо. Например, службы, ip адреса и т.д.')
-    parser.add_argument('--version', nargs='?', default='',
-                        help='Версия скрипта')
+    parser.add_argument('--version', action='store_const', const=version, help='Вывод версии скрипта')
     args = parser.parse_args()
 
-    #  Проверка работы скрипта
-    if args.version != '':
-        with open('version.txt', 'r') as file:
-            text = file.read()
-            show_text(text)
+    # Вывод врсии скрипта
+    if args.version is not None:
+        show_text(args.version, end=False)
 
     #  Управление службами
     if args.service != '' and args.target != '':

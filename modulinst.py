@@ -1,11 +1,17 @@
+"""
+Модуль для работы с зависимостями
+"""
+
 import os
 import sys
 import printer
 
 
 def pip_install(library):
-    """Locate pip.exe on system and install library.
-    Be sure to sanitize input to prevent RCE."""
+    """
+    Установка необходимого модуля. Необходимо наличие pip.exe
+    (Windows - C:/Program Files/Python3/Scripts/pip.exe, Linux - /usr/bin/pip
+    """
 
     if sys.platform == 'win32':
         path_to_pip = 'C:/Program Files/Python3/Scripts/pip.exe'
@@ -21,13 +27,17 @@ def pip_install(library):
         result = stream.read()
 
         if 'Successfully installed' in str(result):
-            printer.show_text('\n\n[+] Successfully installed %s' % library)
-            printer.show_text('Please try again!')
-            sys.exit()
+            printer.show_text('\n\n[+] Успешно установлено %s' % library)
+            printer.show_text('[+] Повторите скрипт повторно')
 
         elif 'FAIL' in str(result).upper() or 'FAILED' in str(result).upper() \
                 or 'FAILURE' in str(result).upper():
-            printer.show_text('[!] Unable to install %d' % library)
-            printer.show_text('[!] Please manually run the pip installer')
+            printer.show_text('[!] Не удается установить модуль %d' % library)
+            printer.show_text('[!] Запустите pip установку вручную на сервере')
             printer.show_text(f'[!] try: {path_to_pip} %s' % library)
             sys.exit()
+    else:
+        if sys.platform == 'win32':
+            printer.show_text('Не найден файл C:/Program Files/Python3/Scripts/pip.exe')
+        else:
+            printer.show_text('Не найден файл /usr/bin/pip')

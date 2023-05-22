@@ -8,12 +8,24 @@ if sys.platform == 'win32':
     try:
         import psutil
     except Exception as e:
-        show('[!] Error importing psutil ... Trying pip installer')
+        show('[!] Ошибка подключения модуля psutil ... Пробую установить с помощью pip')
         pipi('psutil')
         show(e)
 
 
 class Services:
+    """
+    Модуль для управления службами
+
+    Параметры:
+    :param name_service: Название службы
+
+    Методы:
+    status_service() - статус службы
+    stop_service() - остановка службы
+    start_service() - запуск службы
+    restart_service() - перезапуск службы
+    """
 
     def __init__(self, name_service: str):
         self.name_service = name_service
