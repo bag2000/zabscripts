@@ -1,7 +1,7 @@
 import argparse
 from printer import show_text
 
-version = '1.1.1'
+version = '1.1.2'
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Скрипты.')
@@ -37,7 +37,7 @@ if __name__ == "__main__":
         import subprocess
         import os
         if sys.platform == 'win32':
-            proc = subprocess.Popen(['shutdown', '-g -t 0'], stdout=subprocess.PIPE, shell=True, encoding='cp866')
+            proc = subprocess.Popen(['shutdown', '-g', '-t', '0'], stdout=subprocess.PIPE, shell=True, encoding='cp866')
             for line in proc.stdout:
                 print(line)
             show_text('Передан сигнал перезагрузки')
