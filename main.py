@@ -1,10 +1,11 @@
 import argparse
 from printer import show_text
 
-version = '1.0.0'
+version = '1.1.0'
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Скрипты.')
+    parser.add_argument('--reboot', action='store_const', const=version, help='Перезагрузка сервера')
     parser.add_argument('--service', nargs='?', choices=['status', 'start', 'stop', 'restart'], default='',
                         help='Управление службами. Возможные значения: status, start, stop, restart\n'
                              'Используется совместно с --target\n'
@@ -29,3 +30,14 @@ if __name__ == "__main__":
             service = Services(args.target).start_service()
         elif args.service == 'restart':
             service = Services(args.target).restart_service()
+
+    # Перезагрузка сервера
+    if args.reboot is not None:
+        import sys
+        import os
+        if sys.platform == 'win32':
+            os.popen('shutdown -g -t 0')
+            show_text('Передан сигнал перезагрузки')
+        else:
+            os.popen('reboot')
+            show_text('Передан сигнал перезагрузки')
