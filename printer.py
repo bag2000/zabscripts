@@ -15,5 +15,5 @@ def show_text(text, end: bool = True):
         text = str(text) + '\n'
     else:
         text = str(text)
-    text = text.encode('utf8')
+    text = text.encode('utf-8')
     sys.stdout.buffer.write(text)

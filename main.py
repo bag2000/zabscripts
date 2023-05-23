@@ -1,7 +1,7 @@
 import argparse
 from printer import show_text
 
-version = '1.1.0'
+version = '1.1.1'
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Скрипты.')
@@ -34,9 +34,12 @@ if __name__ == "__main__":
     # Перезагрузка сервера
     if args.reboot is not None:
         import sys
+        import subprocess
         import os
         if sys.platform == 'win32':
-            os.popen('shutdown -g -t 0')
+            proc = subprocess.Popen(['shutdown', '-g -t 0'], stdout=subprocess.PIPE, shell=True, encoding='cp866')
+            for line in proc.stdout:
+                print(line)
             show_text('Передан сигнал перезагрузки')
         else:
             os.popen('reboot')
