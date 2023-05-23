@@ -37,7 +37,7 @@ if __name__ == "__main__":
         import subprocess
         import os
         if sys.platform == 'win32':
-            proc = subprocess.Popen(['shutdown', '-g', 'f', '-t', '0'], stdout=subprocess.PIPE, shell=True, encoding='cp866')
+            proc = subprocess.Popen(['shutdown', '-g', '-f', '-t', '0'], stdout=subprocess.PIPE, shell=True, encoding='cp866')
             for line in proc.stdout:
                 print(line)
             show_text('Передан сигнал перезагрузки')
